@@ -66,6 +66,19 @@ Series DataFrame::getColumn(std::string colName) {
     throw std::runtime_error("Column name not found");
 }
 
+// Returns a vector<double> representing a row
+std::vector<double> DataFrame::getRow(size_t row) {
+    //Logic for getting row values
+    //Try to make it more efficent
+    //Create vector representing return values
+    //Initialize vector with values 0 and columns size
+    //for each column name get the index position in col_index
+    // set return vector at given position to what the value is in that column
+    // at the specified row.
+
+    //Row access o (n) with the number of rows 
+}
+
 // Get value at specific location
 double DataFrame::get(int x, int y) {
     if(x > row_size) throw std::out_of_range("row index out of range");

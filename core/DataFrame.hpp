@@ -34,6 +34,9 @@ public:
     // Returns a Series representing a column
     Series getColumn(std::string colName);
 
+    // Returns a vector<double> representing a row
+    std::vector<double> getRow(size_t row);
+
     // Get value at specific location
     double get(int x, int y);
 
