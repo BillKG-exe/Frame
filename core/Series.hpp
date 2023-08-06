@@ -7,12 +7,20 @@
 class Series {
 public:
     // Constructor
+    Series();
+
     Series(const std::string& name);
 
     Series(const std::string& name, std::vector<double> vals);
     
     // Adds element into data 
     void append(double val);
+
+    // Set the name of the serie
+    void setName(std::string name);
+
+    // Get the name of the serie
+    std::string getName();
 
     // Set val at given position in data
     void set(size_t x, double val);
@@ -23,11 +31,20 @@ public:
     // Remove last element from data
     double pop();
 
+    // Returns the size of the Serie
+    size_t size();
+
     // Checks if value is missing from given index
     bool isMissing(size_t x); 
 
+    // Returns vector containing the indices of missing vals
+    std::vector<size_t> missings();
+
     // Returns data to user
     std::vector<double> toVector();
+
+    /* Next Series ops for series as well as int, double and float*/
+    /* operator=, *, +, -, / */
 
 private:
     std::vector<double> data;

@@ -17,19 +17,22 @@ public:
 /*     void DataFrame::addColumn(const std::string& colName); */
 
     //Adds a column to the data frame
-    void addColumn(const std::string& colName, const Series& series);
+    void addColumn(const std::string& colName, Series& series);
     
     //Drops a column from the data frame
     void dropColumn(const std::string& colName);
 
     //Adds a new row to the data frame 
-    void addRow(size_t row, std::vector<double> vals); 
+    void addRow(std::vector<double> vals); 
+
+    // This function drops the last row of data frame
+    void dropRow();
 
     // Set index object for data frame
     void setIndex(const Index& index);
 
     // Get the index object of the data frame
-    Index getIndex(const Index& index);
+    Index getIndex();
 
     // Returns a Series representing a column
     Series getColumn(std::string colName);
@@ -57,6 +60,11 @@ public:
 
     // Reads a file with any extention given a delimiter into a data frame
     void read_file(std::string filepath, char delimiter);
+
+    //Etablish this function to read RData files
+    void read_rdata(std::string filepath);
+
+    /* Next add overload oparator= */
 
 private:
     std::map<std::string, Series> columns;

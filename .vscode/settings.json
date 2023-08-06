@@ -51,6 +51,9 @@
         "xlocinfo": "cpp",
         "xlocmon": "cpp",
         "xlocnum": "cpp",
-        "xloctime": "cpp"
+        "xloctime": "cpp",
+        "fstream": "cpp",
+        "sstream": "cpp",
+        "algorithm": "cpp"
     }
 }
