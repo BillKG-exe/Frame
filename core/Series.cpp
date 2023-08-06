@@ -85,3 +85,54 @@ double Series::pop() {
 std::vector<double> Series::toVector() {
     return this->data;
 }
+
+Series& Series::operator=( Series s2) {
+    if (this != &s2) { 
+        name = s2.name;
+        
+        for(int i = 0; i < s2.size(); i++) {
+            data.push_back(s2.get(i));
+        }
+    }
+    return *this;
+}
+
+Series& Series::operator+(Series s2) {
+
+}
+
+Series& Series::operator+(int num) {
+
+}
+
+Series& Series::operator+(double num) {
+
+}
+
+Series& Series::operator-(Series s2) {
+
+}
+
+Series& Series::operator-(int num) {
+
+}
+
+Series& Series::operator-(double num) {
+
+}
+
+Series& Series::operator*(Series s2) {
+
+}
+
+Series& Series::operator*(int num) {
+
+}
+
+Series& Series::operator*(double num) {
+
+}
+
+Series& Series::operator/(Series s2) {
+
+}

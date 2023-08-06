@@ -45,6 +45,22 @@ public:
 
     /* Next Series ops for series as well as int, double and float*/
     /* operator=, *, +, -, / */
+    Series& operator=(Series s2);
+
+    Series& operator+(Series s2);
+    Series& operator+(int num);
+    Series& operator+(double num);
+
+    Series& operator-(Series s2);
+    Series& operator-(int num);
+    Series& operator-(double num);
+
+    Series& operator*(Series s2);
+    Series& operator*(int num);
+    Series& operator*(double num);
+
+    Series& operator/(Series s2);
+
 
 private:
     std::vector<double> data;

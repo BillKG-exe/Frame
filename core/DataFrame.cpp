@@ -149,7 +149,6 @@ std::vector<double> getFileRow(std::string line, char sep) {
             row.push_back(std::numeric_limits<double>::quiet_NaN());
         }
     }
-
     return row;
 }
 
