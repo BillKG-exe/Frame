@@ -224,3 +224,16 @@ void DataFrame::display(int count) {
         std::cout << std::endl;
     }
 }
+
+
+// Copy data of one dataframe into another
+DataFrame& DataFrame::operator=(DataFrame df2) {
+    for(auto it = df2.columns.begin(); it != df2.columns.end(); it++) {
+        this->columns[it->first] = it->second;
+    }
+
+    this->index = df2.index;
+    this->col_index = df2.col_index;
+    
+    return *this;
+}

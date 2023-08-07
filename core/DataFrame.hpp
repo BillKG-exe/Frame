@@ -65,7 +65,8 @@ public:
     void read_rdata(std::string filepath);
 
     /* Next add overload oparator= */
-
+    DataFrame& operator=(DataFrame df2);
+    
 private:
     std::map<std::string, Series> columns;
     Index index, col_index;

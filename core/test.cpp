@@ -171,10 +171,75 @@ void dataFrameTests() {
     vector<double> res = df2.getRow(1);
 
     for(auto d : res) cout << d << " ";
-    cout << endl;
+    cout << endl << endl;
+}
+
+
+void seriesOpsTest() {
+    vector<double> v = {1,2,3,4,5,6,7,8};
+    Series s1("Name", v);
+
+    s1 + 1;
+
+    cout << "Adding 1 to series s1: ";
+    for(int i = 0; i < s1.size(); i++) {
+        cout << s1.get(i) << " ";
+    }
+    cout << endl << endl;
+
+    s1 = s1 + 1;
+
+    cout << "Adding 1 again to series s1: ";
+    for(int i = 0; i < s1.size(); i++) {
+        cout << s1.get(i) << " ";
+    }
+    cout << endl << endl;
+
+    Series s2 = s1 * 2.1;
+
+    cout << "Multiplying s1 with 2.1 into s2: ";
+    for(int i = 0; i < s2.size(); i++) {
+        cout << s2.get(i) << " ";
+    }
+    cout << endl << endl;
+/* 
+    s1 = s1 - 3;
+
+    cout << "s1: ";
+    for(int i = 0; i < s1.size(); i++) {
+        cout << s1.get(i) << " ";
+    }
+    cout << endl << endl; */
+
+    s2 = s2 - s1;
+
+    cout << "Substracting s1 from s2: ";
+    for(int i = 0; i < s2.size(); i++) {
+        cout << s2.get(i) << " ";
+    }
+    cout << endl << endl;  
+
+    s2 = s2 + s1;
+
+    cout << "Adding s1 back into s2: ";
+    for(int i = 0; i < s2.size(); i++) {
+        cout << s2.get(i) << " ";
+    }
+    cout << endl << endl;  
+
+    Series s3("B", v);
+
+    s3 = s3 + 2;
+    s3 = s3 / s1;
+
+    cout << "Dividing s3 by s1: ";
+    for(int i = 0; i < s3.size(); i++) {
+        cout << s3.get(i) << " ";
+    }
+    cout << endl << endl;  
 }
 
 int main() {
-    dataFrameTests();
+    seriesTests();
     return 0;
 }

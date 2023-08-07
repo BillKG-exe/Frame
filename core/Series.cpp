@@ -88,6 +88,25 @@ std::vector<double> Series::toVector() {
 
 Series& Series::operator=( Series s2) {
     if (this != &s2) { 
+        if(name.empty()) {
+            name = s2.name;
+        }
+
+        if(data.size() == 0) {
+            for(int i = 0; i < s2.size(); i++) {
+                data.push_back(s2.get(i));
+            }
+        } else {
+            for(int i = 0; i < this->size(); i++) {
+                data[i] = this->get(i);
+            }
+        }
+    }
+    return *this;
+}
+
+/*Series& Series::operator=( Series s2) {
+    if (this != &s2) { 
         name = s2.name;
         
         for(int i = 0; i < s2.size(); i++) {
@@ -95,44 +114,92 @@ Series& Series::operator=( Series s2) {
         }
     }
     return *this;
-}
+}*/
 
 Series& Series::operator+(Series s2) {
+    if (this->size() != s2.size()) throw std::runtime_error("Series are not of same size");
+    
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] += s2.get(i);
+    }
 
+    return *this;
 }
 
-Series& Series::operator+(int num) {
+Series& Series::operator+(int num) {    
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] += double(num);
+    }
 
+    return *this;
 }
 
 Series& Series::operator+(double num) {
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] += num;
+    }
 
+    return *this;
 }
 
 Series& Series::operator-(Series s2) {
+    if (this->size() != s2.size()) throw std::runtime_error("Series are not of same size");
+    
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] -= s2.get(i);
+    }
 
+    return *this;
 }
 
 Series& Series::operator-(int num) {
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] -= double(num);
+    }
 
+    return *this;
 }
 
 Series& Series::operator-(double num) {
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] -= num;
+    }
 
+    return *this;
 }
 
 Series& Series::operator*(Series s2) {
+    if (this->size() != s2.size()) throw std::runtime_error("Series are not of same size");
+    
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] *= s2.get(i);
+    }
 
+    return *this;
 }
 
 Series& Series::operator*(int num) {
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] *= double(num);
+    }
 
+    return *this;
 }
 
 Series& Series::operator*(double num) {
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] *= num;
+    }
 
+    return *this;
 }
 
 Series& Series::operator/(Series s2) {
+    if (this->size() != s2.size()) throw std::runtime_error("Series are not of same size");
+    
+    for(int i = 0; i < this->size(); i++) {
+        this->data[i] /= s2.get(i);
+    }
 
+    return *this;
 }
