@@ -5,7 +5,8 @@
 #include <vector>
 #include <limits>
 #include <cmath>
-
+#include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -239,7 +240,32 @@ void seriesOpsTest() {
     cout << endl << endl;  
 }
 
+void df_test_with_raw_text() {
+    DataFrame df;
+
+    df.read_csv("tips.csv");
+
+    df.display();
+    cout << endl << endl;
+    df.display(5, true);
+    cout << endl;
+    // map<string, int> sexFreq = df.getFreq("sex");
+    // map<string, int> dayFreq = df.getFreq("day");
+
+    unordered_map<string, int> sex = {{"Male", 1}, {"Female", 2}};
+    unordered_map<string, int> day = {{"Sun", 1}};
+    unordered_map<string, int> size = {{"3", -1}};
+
+    df.impute("sex", sex);
+    df.impute("day", day);
+    df.impute("size", size);
+
+    df.display();
+
+    cout << "done\n";
+}
+
 int main() {
-    seriesTests();
+    df_test_with_raw_text();
     return 0;
 }

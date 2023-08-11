@@ -47,6 +47,13 @@ size_t Index::getPosition(const std::string& label) const {
     return INVALID_POSITION;
 }
 
+std::string Index::getLabel(size_t index) {
+    for(auto it = label_to_position.begin(); it != label_to_position.end(); it++) {
+        if(it->second == index) return it->first;
+    }
+    return "Not found";
+}
+
 // Return the size of an index object
 size_t Index::size() {
     return label_to_position.size();

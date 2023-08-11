@@ -24,13 +24,19 @@ public:
     // Get the position associated with a label
     size_t getPosition(const std::string& label) const;
 
+    std::string getLabel(size_t index);
+
     //Returns the size of Index
     size_t size();
 
     /* Next add overload oparator= */
 
+    /* Add ERROR checking for assign exisiting index to a new label */
+
     // Constants
     static const size_t INVALID_POSITION = static_cast<size_t>(-1);
+
+    /* NOTE: Try making Index generic */
 private:
     std::map<std::string, size_t> label_to_position;
 };

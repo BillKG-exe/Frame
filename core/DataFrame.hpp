@@ -5,13 +5,14 @@
 #include "index.hpp"
 #include <map>
 #include <string>
+#include <unordered_map>
 
 class DataFrame {
 public: 
     //Constructor
     DataFrame();
 
-    void display(int count = 5);
+    void display(int count = 5, bool text = false);
 
     //Adds a column to the data frame
 /*     void DataFrame::addColumn(const std::string& colName); */
@@ -52,6 +53,8 @@ public:
     // Return row size
     size_t rowSize();
 
+    std::vector<double> getFileRow(std::string line, char sep, std::string colName="");
+
     // Reads a csv file into a data frame
     void read_csv(std::string filepath);
 
@@ -66,9 +69,24 @@ public:
 
     /* Next add overload oparator= */
     DataFrame& operator=(DataFrame df2);
+
+    // Add function to numericalize categorical data.
+    void to_numeric();
+
+    // Return frequences of categorical values of a columns as well as 
+    // their frequences.
+    std::map<std::string, int> getFreq(std::string colName);
     
+    // Replace categorical values with customs values
+    // Should take a dictionary as arguments
+    // Could do imputation with mean, mode, median, etc...
+    void impute(std::string colName, std::unordered_map<std::string, int>impute_map); 
+
+    void impute(std::string colName, std::string method);
+
 private:
     std::map<std::string, Series> columns;
+    std::map<std::string, std::vector<std::string>> raw_cols;
     Index index, col_index;
     int row_size = 0;
 };

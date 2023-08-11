@@ -137,7 +137,7 @@ size_t DataFrame::rowSize() {
 }
 
 // Split a line with gicen separator
-std::vector<double> getFileRow(std::string line, char sep) {
+std::vector<double> DataFrame::getFileRow(std::string line, char sep, std::string colName) {
     std::vector<double> row;
     std::istringstream iss(line);
     std::string value;
@@ -146,6 +146,7 @@ std::vector<double> getFileRow(std::string line, char sep) {
         try {
             row.push_back(std::stod(value));
         } catch(...) {
+            raw_cols[col_index.getLabel(row.size())].push_back(value);
             row.push_back(std::numeric_limits<double>::quiet_NaN());
         }
     }
@@ -178,7 +179,7 @@ void DataFrame::read_file(std::string filepath, char delimiter) {
     }
 
     while(std::getline(file, line)) {
-        std::vector<double> row = getFileRow(line, delimiter);
+        std::vector<double> row = getFileRow(line, delimiter, name);
         addRow(row);
     }
 
@@ -202,7 +203,13 @@ void DataFrame::read_rdata(std::string filepath) {
 
 // Display the elements of the dataframe in table format
 // including column names
-void DataFrame::display(int count) {
+/* NOTE: To display string inside dataset, use a vector of map that has the
+        mapping values of categorical columns that will allow manipulation
+        of data as number and display of data with their respectives
+        categorical string values. Add cat=False into argument to enable
+        either display of number or numbers and strings.  
+*/
+void DataFrame::display(int count, bool text) {
     if(count > row_size) count = row_size;
 
     std::unordered_map<size_t, std::string> cols;
@@ -219,12 +226,73 @@ void DataFrame::display(int count) {
 
     for(int r = 0; r < count; r++) {
         for(int c = 0; c < columns.size(); c++) {
-            std::cout << std::right << std::setw(15) << columns[cols[c]].get(r) << " "; 
+            std::cout << std::right << std::setw(15);
+            if(text && raw_cols[cols[c]].size() != 0) {
+                std::cout << raw_cols[cols[c]][r] << " ";
+            } else {
+                std::cout << columns[cols[c]].get(r) << " "; 
+            }
+            // if text and  raw_cols[cols[c]].size() != 0:
+            // Print text
+            //else print number
+            // Logic to print text data instead of NAN
         }
         std::cout << std::endl;
     }
 }
 
+
+std::map<std::string, int> DataFrame::getFreq(std::string colName) {
+    std::map<std::string, int> freq;
+
+    if(columns.find(colName) == columns.end()) throw std::out_of_range("Column name not found");
+
+    if(raw_cols.find(colName) != raw_cols.end()) {
+        for(int i = 0; i < raw_cols[colName].size(); i++) {
+            freq[raw_cols[colName][i]]++;
+        }
+    } else {
+        for(int i = 0; i < columns[colName].size(); i++) {
+            freq[std::to_string(columns[colName].get(i))]++;
+        }
+    }
+
+    std::cout << "Format ->  value: freqquency" << std::endl;
+    for(auto it = freq.begin(); it != freq.end(); it++) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+void DataFrame::impute(std::string colName, std::string method) {
+    // Provde code for handling imputation using mean, mode, or median to 
+    // replace missing or nan values
+
+    // Check if column is first in raw_cols
+    // If yes, handle it based on raw data 
+    // Else do it based on the double type values
+}
+
+void DataFrame::impute(std::string colName, std::unordered_map<std::string, int> impute_map) {
+    if(columns.find(colName) == columns.end()) throw std::out_of_range("Column name not found");
+
+    if(raw_cols[colName].size() != 0) {
+        for(int i = 0; i < raw_cols[colName].size(); i++) {
+            if(impute_map.find(raw_cols[colName][i]) != impute_map.end()) {
+                columns[colName].set(i, impute_map[raw_cols[colName][i]]);
+            }
+        }
+        return;
+    }
+
+    for(int i = 0; i < columns[colName].size(); i++) {
+        std::string key = std::to_string(int(columns[colName].get(i)));
+
+        if(impute_map.find(key) != impute_map.end()) {
+            columns[colName].set(i, impute_map[key]);
+        }
+    }
+}
 
 // Copy data of one dataframe into another
 DataFrame& DataFrame::operator=(DataFrame df2) {
@@ -237,3 +305,8 @@ DataFrame& DataFrame::operator=(DataFrame df2) {
     
     return *this;
 }
+
+void DataFrame::to_numeric() {
+
+}
+

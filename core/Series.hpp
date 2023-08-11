@@ -61,7 +61,7 @@ public:
 
     Series& operator/(Series s2);
 
-
+/* NOTE: Make series generic! */
 private:
     std::vector<double> data;
     std::vector<bool> is_missing;
