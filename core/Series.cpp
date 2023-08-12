@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <limits>
 #include <cmath>
+#include <algorithm>
 //#include <iostream>
 
 // Constructor
@@ -202,4 +203,8 @@ Series& Series::operator/(Series s2) {
     }
 
     return *this;
+}
+
+void Series::sort() {
+    std::sort(data.begin(), data.end());
 }

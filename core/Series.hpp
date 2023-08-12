@@ -61,6 +61,10 @@ public:
 
     Series& operator/(Series s2);
 
+    Series& operator^(Series s);
+
+    void sort();
+
 /* NOTE: Make series generic! */
 private:
     std::vector<double> data;

@@ -9,6 +9,9 @@ public:
     // Constructor
     Matrix();
 
+    /* Matrix to image function */
+    /* Image to Matrix function*/
+
     /* allow the creation of matrices with multiple types int, string, bool,
     float, double */
 

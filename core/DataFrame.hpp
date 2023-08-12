@@ -84,6 +84,8 @@ public:
 
     void impute(std::string colName, std::string method);
 
+    void eval(std::string expression);
+
 private:
     std::map<std::string, Series> columns;
     std::map<std::string, std::vector<std::string>> raw_cols;
