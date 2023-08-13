@@ -260,7 +260,7 @@ void df_test_with_raw_text() {
     df.impute("day", day);
     df.impute("size", size);
 
-    df.display();
+    df.display(5);
 
     cout << "done\n";
 }

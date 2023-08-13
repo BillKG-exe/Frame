@@ -70,6 +70,9 @@ public:
     /* Next add overload oparator= */
     DataFrame& operator=(DataFrame df2);
 
+    // Add the rows to multual columns together
+    DataFrame& operator+(DataFrame df2);
+
     // Add function to numericalize categorical data.
     void to_numeric();
 
@@ -85,6 +88,46 @@ public:
     void impute(std::string colName, std::string method);
 
     void eval(std::string expression);
+
+    DataFrame rowRange(int start, int end);
+
+    /* Plotting using third party library */
+
+
+    /* 
+    
+    DataFrame DataFrame::filterByCondition(const std::string& column, const std::function<bool(double)>& condition) const {
+        if (columns_.find(column) == columns_.end()) {
+            throw std::runtime_error("Column not found.");
+        }
+
+        DataFrame filteredDataFrame;
+        filteredDataFrame.columns_[column] = {};
+
+        const std::vector<double>& data = columns_.at(column);
+
+        for (double value : data) {
+            if (condition(value)) {
+                filteredDataFrame.columns_[column].push_back(value);
+            }
+        }
+
+        return filteredDataFrame;
+    }
+
+    DataFrame DataFrame::selectColumns(const std::vector<std::string>& columns) const {
+        DataFrame selectedDataFrame;
+
+        for (const std::string& column : columns) {
+            if (columns_.find(column) != columns_.end()) {
+                selectedDataFrame.columns_[column] = columns_.at(column);
+            }
+        }
+
+        return selectedDataFrame;
+    }
+        
+    */
 
 private:
     std::map<std::string, Series> columns;

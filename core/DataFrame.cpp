@@ -227,15 +227,11 @@ void DataFrame::display(int count, bool text) {
     for(int r = 0; r < count; r++) {
         for(int c = 0; c < columns.size(); c++) {
             std::cout << std::right << std::setw(15);
-            if(text && raw_cols[cols[c]].size() != 0) {
+            if(text && raw_cols[cols[c]].size() == row_size) {
                 std::cout << raw_cols[cols[c]][r] << " ";
             } else {
                 std::cout << columns[cols[c]].get(r) << " "; 
             }
-            // if text and  raw_cols[cols[c]].size() != 0:
-            // Print text
-            //else print number
-            // Logic to print text data instead of NAN
         }
         std::cout << std::endl;
     }
@@ -304,6 +300,10 @@ DataFrame& DataFrame::operator=(DataFrame df2) {
     this->col_index = df2.col_index;
     
     return *this;
+}
+
+void DataFrame::eval(std::string expression) {
+
 }
 
 void DataFrame::to_numeric() {

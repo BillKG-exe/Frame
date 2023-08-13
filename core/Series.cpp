@@ -205,6 +205,14 @@ Series& Series::operator/(Series s2) {
     return *this;
 }
 
+Series& Series::operator^(int power) {
+    for(int i = 0; i < data.size(); i++) {
+        data[i] = pow(data[i], power);        
+    }
+
+    return *this;
+}
+
 void Series::sort() {
     std::sort(data.begin(), data.end());
 }

@@ -51,7 +51,7 @@ public:
     Series& operator+(int num);
     Series& operator+(double num);
 
-    Series& operator-(Series s2);
+    Series& operator-(Series s2); 
     Series& operator-(int num);
     Series& operator-(double num);
 
@@ -61,7 +61,7 @@ public:
 
     Series& operator/(Series s2);
 
-    Series& operator^(Series s);
+    Series& operator^(int power);
 
     void sort();
 
